@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 function deleteKey() {
     delete dataArray.Like_List.ItemFavoriteList
-    fs.writeFileSync('data.json', JSON.stringify(dataArray, null, 2) , 'utf-8');
+    fs.writeFileSync(data_path, JSON.stringify(dataArray, null, 2) , 'utf-8');
 }
 
 async function extractFavoriteVideos() {
@@ -25,19 +25,23 @@ async function extractFollowing() {
 
 async function extractChats() {
     var history = dataArray["Direct Messages"]["Chat History"].ChatHistory
-    writeFileSync("chats.txt", "", { flag: "w" })
+    var chats_path = 'result/chats.txt'
+
+    writeFileSync(chats_path, "", { flag: "w" })
+
     for (var chat of Object.keys(history)) {
         if (chat.toString().includes(" "))
-            writeFileSync("chats.txt", " ======= " + chat.toString() + " ======= " + "\n", { flag: "a+" })
+            writeFileSync(chats_path, " ======= " + chat.toString() + " ======= " + "\n", { flag: "a+" })
             for (var message of history[chat]) {
                 // console.log(message.From + ": " + message.Content)
-                writeFileSync("chats.txt", message.From + ": " + message.Content + "\n", { flag: "a+" })
+                writeFileSync(chats_path, message.From + ": " + message.Content + "\n", { flag: "a+" })
             }
-            writeFileSync("chats.txt", " ============== " + "\n", { flag: "a+" })
+            writeFileSync(chats_path, " ============== " + "\n", { flag: "a+" })
     }
 }
 
-var dataArray = JSON.parse(fs.readFileSync('data.json', 'utf-8'))
+var data_path = 'data/data.json'
+var dataArray = JSON.parse(fs.readFileSync(data_path, 'utf-8'))
 
 extractFollowing();
 extractFavoriteVideos();

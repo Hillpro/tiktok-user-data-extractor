@@ -2,9 +2,9 @@
   "name": "tiktok_data_1662178598",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node ."
   },
   "keywords": [],
   "author": "",
